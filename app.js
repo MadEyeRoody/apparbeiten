@@ -59,7 +59,6 @@ if ('development' == app.get('env')) {
     app.use(errorHandler());
 }
 
-var db = dbService.db;
 
 /* Routing */
 
@@ -75,7 +74,7 @@ app.delete('/api/deleteComment', comment.deleteComment);
 app.post('/api/createVorhaben', vorhaben.createVorhaben);
 
 // user crud
-app.get('/api/getUserById/:userId', user.getUserById);
+app.get('/api/users/:username', user.getUserByName);
 app.get('/api/getUsers', user.getUsers);
 app.post('/api/createUser', user.createUser);
 

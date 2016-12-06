@@ -1,52 +1,44 @@
 var config    = require('../config/config').config;
 
-var db;
+var MongoClient = require("mongodb").MongoClient;
+var mongodb;
 
-var cloudant;
+// // Now lets get cfenv and ask it to parse the environment variable
+// var cfenv = require('cfenv');
+// var appenv = cfenv.getAppEnv();
 
-var fileToUpload;
+// // Within the application environment (appenv) there's a services object
+// var services = appenv.services;
 
-var dbCredentials = {
-    dbName: 'my_sample_db'
-};
+// The services object is a map named by service so we extract the one for MongoDB
+//var mongodb_services = services["compose-for-mongodb"];
 
-
-function initDBConnection() {
-    //When running on Bluemix, this variable will be set to a json object
-    //containing all the service credentials of all the bound services
-    if (process.env.VCAP_SERVICES) {
-        var vcapServices = JSON.parse(process.env.VCAP_SERVICES);
-        // Pattern match to find the first instance of a Cloudant service in
-        // VCAP_SERVICES. If you know your service key, you can access the
-        // service credentials directly by using the vcapServices object.
-        for (var vcapService in vcapServices) {
-            if (vcapService.match(/cloudant/i)) {
-                dbCredentials.url = vcapServices[vcapService][0].credentials.url;
-            }
+MongoClient.connect(config.DB_URL, {
+        mongos: {
+            ssl: true,
+            sslValidate: true,
+            sslCA: new Buffer(config.CERT, 'base64'),
+            poolSize: 1,
+            reconnectTries: 1
         }
-    } else { //When running locally, the VCAP_SERVICES will not be set
-
-        // When running this app locally you can get your Cloudant credentials
-        // from Bluemix (VCAP_SERVICES in "cf env" output or the Environment
-        // Variables section for an app in the Bluemix console dashboard).
-        // Alternately you could point to a local database here instead of a
-        // Bluemix service.
-        // url will be in this format: https://username:password@xxxxxxxxx-bluemix.cloudant.com
-        dbCredentials.url = config.DB_URL;
-    }
-
-    cloudant = require('cloudant')(dbCredentials.url);
-
-    // check if DB exists if not create
-    cloudant.db.create(dbCredentials.dbName, function(err, res) {
+    },
+    function(err, db) {
+        // Here we handle the async response. This is a simple example and
+        // we're not going to inject the database connection into the
+        // middleware, just save it in a global variable, as long as there
+        // isn't an error.
         if (err) {
-            console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
+            console.log(err);
+        } else {
+            // Although we have a connection, it's to the "admin" database
+            // of MongoDB deployment. In this example, we want the
+            // "examples" database so what we do here is create that
+            // connection using the current connection.
+            mongodb = db.db("examples");
+            
+            
         }
-    });
+    }
+);
 
-    db = cloudant.use(dbCredentials.dbName);
-}
-
-initDBConnection();
-
-exports.db = db;
+exports.db = () => {return mongodb;};

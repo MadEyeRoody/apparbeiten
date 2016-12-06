@@ -1,29 +1,19 @@
 var db = require('../services/dbService').db;
+const collection = "vorhaben";
 
 exports.createVorhaben = function(request, response){
 
-    console.log("user: " + request.body.vorhaben);
-
     var vorhaben = request.body.user;
 
-    var id;
+    console.log("vorhaben: ", vorhaben);
 
-    if (id === undefined) {
-        // Generated random id
-        id = '';
-    }
+    var user = request.body.user;
 
-     db.insert({
-                username: vorhaben.name,
-                image: vorhaben.image,
-                users: []
-        }, id, function(err, doc) {
-            if (err) {
-                console.log(err);
-                response.sendStatus(500);
-            } else {
-                response.sendStatus(200);
-            }
-            response.end();
-        });
-};
+    db().collection(collection).insertOne(vorhaben, function(error, result) {
+      if (error) {
+        response.status(500).send(error);
+      } else {
+        response.send(result);
+      }
+    });
+}

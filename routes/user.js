@@ -1,5 +1,5 @@
 var db = require('../services/dbService').db;
-
+const collection = 'users';
 
 exports.createUser = function(request, response){
 
@@ -7,115 +7,43 @@ exports.createUser = function(request, response){
 
     var user = request.body.user;
 
-     db.insert({
-                username: user.name,
-                role: user.role,
-                email: user.email,
-                image: user.image,
-                unternehmen: user.unternehmen
-
-        }, '', function(err, doc) {
-            if (err) {
-                console.log(err);
-                response.sendStatus(500);
-            } else {
-                response.sendStatus(200);
-            }
-            response.end();
-        });
+    db().collection(collection).insertOne(user, function(error, result) {
+      if (error) {
+        response.status(500).send(error);
+      } else {
+        response.send(result);
+      }
+    });
 };
 
 exports.deleteUser = function(request, response) {
     var id = request.query.id;
-    // var rev = request.query.rev; // Rev can be fetched from request. if
-    // needed, send the rev from client
-    console.log("Removing document of ID: " + id);
-    console.log('Request Query: ' + JSON.stringify(request.query));
 
-    if (!id){
-        response.sendStatus(410);
-        return;
-    }
-
-    db.get(id, {
-        revs_info: true
-    }, function(err, doc) {
-        if (!err) {
-            db.destroy(doc._id, doc._rev, function(err, res) {
-                // Handle response
-                if (err) {
-                    console.log(err);
-                    response.sendStatus(500);
-                } else {
-                    response.sendStatus(200);
-                }
-            });
-        }
-    });
+    db().collection(collection).deleteOne({ id : id }, function(err, result) {
+        response.send(result);
+      });
 };
 
-exports.getUserById = function(request, response) {
-  var id = request.params.userId;
+exports.getUserByName = function (request, response) {
+  var name = request.params.username;
 
-  db.get(id, { revs_info: true }, function(err, body) {
-    if (!err){
-      console.log(body);
-      response.json(body);
+  db().collection(collection).findOne({username : name }, function (err, result) {
+    if (err) {
+      response.status(500).send(err);
     } else {
-
-      response.sendStatus(400);
-      response.end();
+      response.json(result);
     }
   });
 };
 
 exports.getUsers = function(request, response){
     
-    var docList = [];
-    var i = 0;
-    db.list(function(err, body) {
-
-        if (!err) {
-            var len = body.rows.length;
-            var i = 0;
-            console.log('total # of docs -> ' + len);
-            
-            if (len > 0) {
-            body.rows.forEach(function(document) {
-
-                db.get(document.id, {
-                    revs_info: true
-                }, function(err, doc) {
-                    if (!err) {
-
-                        i++;
-                        docList.push({
-                            id : doc._id,
-                            username : doc.username,
-                            email : doc.email,
-                            image : doc.image,
-                            unternehmen: doc.unternehmen
-                        });    
-                        
-                        if (i >= len) {
-                               response.json(docList);
-                                console.log('ending response...');
-                            }
-
-                    } else {
-                        console.log(err);
-                        response.end();
-                    }
-                });
-
-            });
-            } else {
-                response.end();
-            }
-
-        } else {
-            console.log(err);
-            response.end();
-        }
-    });
+  db().collection(collection).find().toArray(function (err, words) {
+    if (err) {
+      response.status(500).send(err);
+    } else {
+      response.json(words);
+    }
+  });
+    
 };
