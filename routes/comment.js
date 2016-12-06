@@ -1,7 +1,7 @@
 var dbService = require('../services/dbService');
 var db = dbService.db;
 
-var watsonService = require('../services/watsonService');
+//var watsonService = require('../services/watsonService');
 
 
 

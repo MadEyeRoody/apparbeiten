@@ -5,6 +5,7 @@
 var express = require('express'),
     routes = require('./routes'),
     comment = require('./routes/comment'),
+    vorhaben = require('./routes/vorhaben'),
     user = require('./routes/user'),
     dbService = require('./services/dbService'),
     http = require('http'),
@@ -69,6 +70,14 @@ app.post('/api/insertComment', comment.insertComment);
 app.get('/api/getComments', comment.getComments);
 
 app.delete('/api/deleteComment', comment.deleteComment);
+
+// vorhaben
+app.post('/api/createVorhaben', vorhaben.createVorhaben);
+
+// user crud
+app.get('/api/getUserById/:userId', user.getUserById);
+app.get('/api/getUsers', user.getUsers);
+app.post('/api/createUser', user.createUser);
 
 //app.post('/api/analyzeComment', comment.analyzeComment)
 
