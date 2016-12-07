@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
 import { AppService } from '../service/appService';
-import { TaskModalPage } from '../../modals/task/task-modal';
 import { CreateTaskPage } from '../../modals/createTask/createTask'
 import { CreateVorhabenPage } from '../../modals/createVorhaben/createVorhaben'
 import { ModalController, NavController} from 'ionic-angular';
 import { VorhabenDetailsPage } from '../vorhaben-details/vorhaben-details';
 import { ActionSheetController } from 'ionic-angular';
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [AppService]
+  providers: [AppService,]
 })
 
 export class HomePage {
   favTasks: Array<any>;
   tasks: Array<any>;
   aufgaben: Array<any>;
+  meinUser;
 
-  meinUser; // John Snow
+  constructor(public modalCtrl: ModalController,  private appService: AppService,
 
-  constructor(public modalCtrl: ModalController,  private appService: AppService, 
         public navCtrl: NavController,
         public actionSheetCtrl: ActionSheetController) {
 
@@ -52,27 +53,33 @@ export class HomePage {
 
     //clickedAufgabe.selected = !selected;
 
-    if (!selected) {
-        this.tasks.forEach((vorhaben) => {
-          if (vorhaben.aufgaben) {
-              vorhaben.aufgaben.forEach((aufgabe) => {
-                if (aufgabe.name == clickedAufgabe.name) {
-                    aktiveVorhaben = vorhaben;
+    if (!selected){
+      clickedAufgabe.selected = true;
 
-                    if (aufgabe.beteiligtePersonen) {
-                      aufgabe.beteiligtePersonen.push(this.meinUser);
-                    } else {
-                      aufgabe.beteiligtePersonen = [this.meinUser];
-                    } 
-
-                    console.info("aktiveVorhaben", aktiveVorhaben);
-                    this.appService.updateVorhaben(aktiveVorhaben);
-                    this.refresh(null);
-                }
-              })
-          }
-        });
+      this.aufgaben.push(clickedAufgabe);
     }
+
+    // if (!selected) {
+    //     this.tasks.forEach((vorhaben) => {
+    //       if (vorhaben.aufgaben) {
+    //           vorhaben.aufgaben.forEach((aufgabe) => {
+    //             if (aufgabe.name == clickedAufgabe.name) {
+    //                 aktiveVorhaben = vorhaben;
+
+    //                 if (aufgabe.beteiligtePersonen) {
+    //                   aufgabe.beteiligtePersonen.push(this.meinUser);
+    //                 } else {
+    //                   aufgabe.beteiligtePersonen = [this.meinUser];
+    //                 } 
+
+    //                 console.info("aktiveVorhaben", aktiveVorhaben);
+    //                 this.appService.updateVorhaben(aktiveVorhaben);
+    //                 this.refresh(null);
+    //             }
+    //           })
+    //       }
+    //     });
+    // }
     
     
   }
@@ -130,11 +137,6 @@ export class HomePage {
     this.navCtrl.push(VorhabenDetailsPage, {
     vorhaben: data
     });
-  }
-
-  openModal(item) {
-    let modal = this.modalCtrl.create(TaskModalPage, item);
-    modal.present();
   }
 
   createTask(){
