@@ -1,7 +1,10 @@
 /**
  * Created by roody on 07.12.16.
  */
-import {Platform, NavParams, ViewController, ModalController, ActionSheetController} from 'ionic-angular';
+import {
+  Platform, NavParams, ViewController, ModalController, ActionSheetController,
+  ToastController
+} from 'ionic-angular';
 import { Component } from '@angular/core';
 import {AppService} from "../../pages/service/appService";
 import { PickPersonsPage } from '../../modals/pickPersons/pickPersons'
@@ -25,7 +28,8 @@ export class CreateTaskPage {
     public viewCtrl: ViewController,
     private appService: AppService,
     public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController
   ) {
 
     this.refresh(null);
@@ -52,6 +56,7 @@ export class CreateTaskPage {
 
     this.appService.updateVorhaben(this.vorhaben);
 
+    this.presentToast();
     this.dismiss();
   }
 
@@ -116,6 +121,14 @@ export class CreateTaskPage {
     });
     actionSheet.present();
 
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Aufgabe angelegt',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }

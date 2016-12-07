@@ -1,7 +1,7 @@
 /**
  * Created by roody on 07.12.16.
  */
-import {Platform, NavParams, ViewController } from 'ionic-angular';
+import {Platform, NavParams, ViewController, ToastController} from 'ionic-angular';
 import { Component } from '@angular/core';
 import { AppService } from '../../pages/service/appService';
 import {Http} from '@angular/http';
@@ -21,7 +21,8 @@ export class CreateVorhabenPage {
     public params: NavParams,
     public viewCtrl: ViewController,
     private appService: AppService,
-    private http: Http
+    private http: Http,
+    public toastCtrl: ToastController
   ) {
 
     this.data = {};
@@ -50,7 +51,7 @@ export class CreateVorhabenPage {
     refresh() {
         this.appService.getUsers().subscribe(
                 data => {
-                    this.users = data; 
+                    this.users = data;
                     console.log("data:", data);
 
                 },
@@ -67,7 +68,7 @@ export class CreateVorhabenPage {
       var link = 'http://apparbeiten.eu-gb.mybluemix.net/api/createVorhaben';
       this.data.users = this.selectedPersons;
         var data = {'vorhaben': this.data};//JSON.stringify({'vorhaben': this.data});
-        
+
         console.log('data to post:', {'vorhaben': this.data});
 
         this.http.post(link, data)
@@ -77,11 +78,20 @@ export class CreateVorhabenPage {
             console.warn("fehler:" , error);
         });
 
+    this.presentToast();
     this.dismiss();
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Vorhaben angelegt',
+      duration: 3000
+    });
+    toast.present();
   }
 }
 /**
