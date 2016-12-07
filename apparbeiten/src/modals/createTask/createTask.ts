@@ -31,6 +31,7 @@ export class CreateTaskPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController
   ) {
+    this.vorhaben=null;
 
     this.refresh(null);
 
@@ -90,11 +91,18 @@ export class CreateTaskPage {
   }
 
   openPersonSelector(){
-    let modal = this.modalCtrl.create(PickPersonsPage);
+    if(this.vorhaben!=null) {
+      let modal = this.modalCtrl.create(PickPersonsPage, this.vorhaben);
+      modal.present();
 
-    modal.present();
+      modal.onDidDismiss(data=> this.selectedPersons=data)
+    }else {
+      let modal = this.modalCtrl.create(PickPersonsPage, {users: 'noUsers'});
+      modal.present();
 
-    modal.onDidDismiss(data=> this.selectedPersons=data)
+      modal.onDidDismiss(data=> this.selectedPersons=data)
+    }
+
 
 
   }

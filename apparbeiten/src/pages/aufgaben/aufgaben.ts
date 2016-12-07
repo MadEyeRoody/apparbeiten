@@ -6,7 +6,7 @@ import {CreateTaskPage} from "../../modals/createTask/createTask";
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'aufgaben.html'
+  templateUrl: 'aufgaben.html',
 })
 export class ContactPage {
 
@@ -15,7 +15,12 @@ export class ContactPage {
     public modalCtrl: ModalController
   ) {
 
+
+
   }
+
+
+
 
   createTask(){
     let modal = this.modalCtrl.create(CreateTaskPage);
