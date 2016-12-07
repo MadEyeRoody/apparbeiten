@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import {NavController, ModalController} from 'ionic-angular';
 import { AppService } from '../service/appService';
 import { ActionSheetController } from 'ionic-angular';
