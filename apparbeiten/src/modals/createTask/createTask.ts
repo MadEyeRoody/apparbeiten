@@ -37,13 +37,13 @@ export class CreateTaskPage {
 
   saveTask(){
 
-    var task = [
+    var task =
       {
         name: this.taskName,
         endDatum: this.dueDate,
         beteiligtePersonen:this.selectedPersons
       }
-    ]
+    
 
 
 
