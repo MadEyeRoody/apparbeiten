@@ -1,7 +1,7 @@
 /**
  * Created by roody on 07.12.16.
  */
-import {Platform, NavParams, ViewController, ModalController} from 'ionic-angular';
+import {Platform, NavParams, ViewController, ModalController, ActionSheetController} from 'ionic-angular';
 import { Component } from '@angular/core';
 import {AppService} from "../../pages/service/appService";
 import { PickPersonsPage } from '../../modals/pickPersons/pickPersons'
@@ -12,10 +12,10 @@ import { PickPersonsPage } from '../../modals/pickPersons/pickPersons'
 })
 
 export class CreateTaskPage {
-  participants;
-  newTask;
+  taskName;
+  dueDate;
   tasks: Array<any>;
-  vorhaben: Array<any>;
+  vorhaben;
   selectedPersons:Array<any>;
 
 
@@ -24,34 +24,35 @@ export class CreateTaskPage {
     public params: NavParams,
     public viewCtrl: ViewController,
     private appService: AppService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController
   ) {
 
+    this.refresh(null);
+  }
 
+  saveTask(){
 
-    var newTask = [
+    var task = [
       {
-        name:'',
-        dueTime:''
+        name: this.taskName,
+        endDatum: this.dueDate,
+        beteiligtePersonen:this.selectedPersons
       }
     ]
 
-    var participants = [
-      {
-        name: 'Gollum',
-        role: 'Responsible',
-      },
-      {
-        name: '',
-        role: 'Responsible',
-      },
 
-    ];
 
-    this.participants = participants;
-    this.newTask=newTask;
+    if (this.vorhaben.aufgaben != null)
+    this.vorhaben.aufgaben.push(task);
+    else
+    this.vorhaben.aufgaben = task;
 
-    this.refresh(null);
+    console.log(JSON.stringify(this.vorhaben));
+
+    this.appService.updateVorhaben(this.vorhaben);
+
+    this.dismiss();
   }
 
   dismiss() {
@@ -80,7 +81,43 @@ export class CreateTaskPage {
     modal.present();
 
     modal.onDidDismiss(data=> this.selectedPersons=data)
+
+
   }
+
+  changeRACI(person){
+    console.log("changeRACI");
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Rolle Wählen',
+      buttons: [
+        {
+          text: 'Responsible',
+          handler: () => {
+            person.taskStatus="Responsible";
+          }
+        },{
+          text: 'Accountable',
+          handler: () => {
+            person.taskStatus="Accountable";
+          }
+        },{
+          text: 'Consultable',
+          role: 'cancel',
+          handler: () => {
+            person.taskStatus="Consultable";
+          }
+        },{
+          text: 'Informable',
+          handler: () => {
+            person.taskStatus="Informable";
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+
+  }
+
 }
 /**
  * Created by roody on 07.12.16.

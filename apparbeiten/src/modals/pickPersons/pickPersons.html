@@ -10,8 +10,12 @@
 
   <ion-list>
     <ion-item  *ngFor="let person of persons">
+      <ion-checkbox  item-left (click)="addOrRemovePerson(person)"></ion-checkbox>
+      <ion-avatar item-left>
+        <img src="{{person.image}}">
+      </ion-avatar>
       <ion-label>{{person.username}}</ion-label>
-      <ion-checkbox   (click)="addOrRemovePerson(person)"></ion-checkbox>
+
     </ion-item>
 
 
