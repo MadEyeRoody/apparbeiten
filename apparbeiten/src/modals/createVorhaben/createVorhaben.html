@@ -15,12 +15,12 @@
 <ion-content>
   <ion-item>
     <ion-label color="primary" stacked>Name</ion-label>
-    <ion-input type="text" placeholder="Name des Vorgangs"></ion-input>
+    <ion-input type="text" placeholder="Name des Vorgangs" [(ngModel)]="data.name"></ion-input>
   </ion-item>
 
     <ion-item>
     <ion-label color="primary" stacked>Beschreibung</ion-label>
-    <ion-input type="text" placeholder="Beschreibung des Vorgangs"></ion-input>
+    <ion-input type="text" placeholder="Beschreibung des Vorgangs" [(ngModel)]="data.beschreibung"></ion-input>
   </ion-item>
 
 <ion-list>
@@ -34,5 +34,5 @@
   </ion-item>
 </ion-list>
 
-  <button ion-button>Vorgang erstellen</button>
+  <button ion-button (click)="save()">Vorgang erstellen</button>
 </ion-content>

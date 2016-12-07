@@ -31,3 +31,25 @@ exports.getVorhaben = function(request, response){
   });
     
 };
+
+
+exports.updateVorhaben = function(request, response){
+
+    var vorhaben = request.body.vorhaben;
+
+    console.log("vorhaben: ", vorhaben);
+
+    db().collection(collection).updateOne({ name : vorhaben.name }
+    , { $set: {
+         users : vorhaben.users, 
+         aufgaben : vorhaben.aufgaben
+    } }, 
+    function(err, result) {
+        if (!err) {
+            response.json(result);
+        }
+        else {
+        response.status(400).send(err);
+        }
+    });  
+};

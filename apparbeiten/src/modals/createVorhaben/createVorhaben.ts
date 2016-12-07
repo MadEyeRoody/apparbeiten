@@ -4,6 +4,7 @@
 import {Platform, NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { AppService } from '../../pages/service/appService';
+import {Http} from '@angular/http';
 
 @Component({
   templateUrl: 'createVorhaben.html',
@@ -12,13 +13,19 @@ import { AppService } from '../../pages/service/appService';
 
 export class CreateVorhabenPage {
   users;
-
+  data;
   constructor(
     public platform: Platform,
     public params: NavParams,
     public viewCtrl: ViewController,
-     private appService: AppService
+     private appService: AppService,
+     private http: Http
   ) {
+
+      this.data = {};
+      this.data.name = '';
+       this.data.users = [];
+      this.data.beschreibung = '';
     
     this.refresh();
   }
@@ -37,6 +44,23 @@ export class CreateVorhabenPage {
 
             );
    }
+
+  save() {
+
+      var link = 'http://localhost:3000/api/createVorhaben';//'http://apparbeiten.eu-gb.mybluemix.net/api/createVorhaben';
+        var data = {'vorhaben': this.data};//JSON.stringify({'vorhaben': this.data});
+        
+        console.log('data to post:', {'vorhaben': this.data});
+
+        this.http.post(link, data)
+        .subscribe(data => {
+          console.log(data);
+        }, error => {
+            console.warn("fehler:" , error);
+        });
+
+    this.dismiss();
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();
