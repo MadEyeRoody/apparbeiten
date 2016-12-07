@@ -25,14 +25,22 @@
 
 <ion-list>
   <ion-list-header>
-    Teilnehmer hinzufügen
+    <ion-icon name="people"></ion-icon> Teilnehmer hinzufügen
   </ion-list-header>
   <ion-item *ngFor="let user of users">
+    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+    <ion-avatar item-left>
+      <img src="{{user.image}}">
+    </ion-avatar>
     <ion-label>{{user.username}}</ion-label>
     <ion-note item-right>{{user.unternehmen}}</ion-note>
-    <ion-checkbox color="dark" checked="true"></ion-checkbox>
   </ion-item>
 </ion-list>
 
-  <button ion-button (click)="save()">Vorgang erstellen</button>
+
+  
+  <br><br>
+  <br><br>
+
+  <button ion-button full color="secondary" (click)="save()">Vorgang erstellen</button>
 </ion-content>

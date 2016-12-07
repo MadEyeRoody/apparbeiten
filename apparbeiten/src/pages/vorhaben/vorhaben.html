@@ -28,17 +28,20 @@
 -->
 
     <ion-list>
-        <button (click)="nav(task)" ion-item *ngFor="let task of tasks" detail-push>
+        <ion-item *ngFor="let task of tasks" detail-push>
+
+        <button (click)="nav(task)" ion-item >
                 <ion-avatar item-left>
                   <img src="{{task.image}}">
                 </ion-avatar>
                 <h2>{{task.name}}</h2>
                 <p>{{task.beschreibung}}</p>
                 <p><ion-note item-right>{{task.unternehmen}}</ion-note></p>
-                <button item-right ion-button icon-only clear (click)="presentActionSheet()">
-                  <ion-icon name="more"></ion-icon>
-                </button>
           </button>
+          <button item-right ion-button icon-only clear (click)="presentActionSheet()">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-item>
     </ion-list>
     <!--</ion-refresher-content>-->
 

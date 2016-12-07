@@ -98,6 +98,7 @@ app.get('/api/getVorhaben', vorhaben.getVorhaben);
 app.get('/api/users/:username', user.getUserByName);
 app.get('/api/getUsers', user.getUsers);
 app.post('/api/createUser', user.createUser);
+app.delete('/api/deleteUser', user.deleteUser)
 
 //app.post('/api/analyzeComment', comment.analyzeComment)
 

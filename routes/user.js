@@ -17,9 +17,9 @@ exports.createUser = function(request, response){
 };
 
 exports.deleteUser = function(request, response) {
-    var id = request.query.id;
+    var name = request.body.username;
 
-    db().collection(collection).deleteOne({ id : id }, function(err, result) {
+    db().collection(collection).deleteOne({ username : name }, function(err, result) {
         response.send(result);
       });
 };
