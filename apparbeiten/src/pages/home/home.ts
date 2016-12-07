@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { TaskModalPage } from '../../modals/task/task-modal';
 import { CreateTaskPage } from '../../modals/createTask/createTask'
+import { CreateVorhabenPage } from '../../modals/createVorhaben/createVorhaben'
 import {ModalController} from 'ionic-angular';
 
 @Component({
@@ -22,6 +23,12 @@ export class HomePage {
 
   createTask(){
     let modal = this.modalCtrl.create(CreateTaskPage);
+
+    modal.present();
+  }
+
+  createVorhaben(){
+    let modal = this.modalCtrl.create(CreateVorhabenPage);
 
     modal.present();
   }

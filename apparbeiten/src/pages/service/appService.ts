@@ -16,4 +16,9 @@ export class AppService {
         return res;
     } 
 
+    getUsers() {
+        var res = this.http.get("http://apparbeiten.eu-gb.mybluemix.net/api/getUsers").map(res => res.json());
+        console.info('response', res);
+        return res;
+    } 
 }

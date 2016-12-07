@@ -12,19 +12,25 @@ export class AboutPage {
 
   tasks: Array<any>;
  
-
-  constructor(public navCtrl: NavController, private appService: AppService) {
-
-    this.appService.getVorhaben().subscribe(
+  refresh(refresher) {
+        this.appService.getVorhaben().subscribe(
                 data => {
                     this.tasks = data; 
                     console.log("data:", data);
+                    if (refresher)
+                      refresher.complete();
                 },
                 err => {
                     console.log(err);
                 },
                 () => console.log('Complete')
+
             );
+  }
+
+  constructor(public navCtrl: NavController, private appService: AppService) {
+
+    this.refresh(null);
 
 //    this.tasks = this.appService.getVorhaben();
 

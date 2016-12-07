@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Neues Vorhaben
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label color="primary" stacked>Name</ion-label>
+    <ion-input type="text" placeholder="Name des Vorgangs"></ion-input>
+  </ion-item>
+
+    <ion-item>
+    <ion-label color="primary" stacked>Beschreibung</ion-label>
+    <ion-input type="text" placeholder="Beschreibung des Vorgangs"></ion-input>
+  </ion-item>
+
+<ion-list>
+  <ion-list-header>
+    Teilnehmer hinzufügen
+  </ion-list-header>
+  <ion-item *ngFor="let user of users">
+    <ion-label>{{user.username}}</ion-label>
+    <ion-note item-right>{{user.unternehmen}}</ion-note>
+    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+  </ion-item>
+</ion-list>
+
+  <button ion-button>Vorgang erstellen</button>
+</ion-content>

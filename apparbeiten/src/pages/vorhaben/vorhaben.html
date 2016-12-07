@@ -6,9 +6,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
 
-  
+<ion-content padding>
+<!--<ion-refresher (ionRefresh)="refresh($event)">
+
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+-->
+
     <ion-list>
         <button ion-item *ngFor="let task of tasks" detail-push>
                 <ion-avatar item-left>
@@ -19,8 +27,9 @@
                 <ion-note item-right>{{task.unternehmen}}</ion-note>
           </button>
     </ion-list>
+    <!--</ion-refresher-content>-->
 
-
+<!--</ion-refresher>-->
   <!-- Here Fab Button -->
   <ion-fab right bottom>
     <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
