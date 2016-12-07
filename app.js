@@ -54,6 +54,25 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/style', express.static(path.join(__dirname, '/views/style')));
 
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
+
 // development only
 if ('development' == app.get('env')) {
     app.use(errorHandler());
@@ -72,6 +91,7 @@ app.delete('/api/deleteComment', comment.deleteComment);
 
 // vorhaben
 app.post('/api/createVorhaben', vorhaben.createVorhaben);
+app.get('/api/getVorhaben', vorhaben.getVorhaben);
 
 // user crud
 app.get('/api/users/:username', user.getUserByName);

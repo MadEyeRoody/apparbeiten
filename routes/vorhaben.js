@@ -3,7 +3,7 @@ const collection = "vorhaben";
 
 exports.createVorhaben = function(request, response){
 
-    var vorhaben = request.body.user;
+    var vorhaben = request.body.vorhaben;
 
     console.log("vorhaben: ", vorhaben);
 
@@ -16,4 +16,18 @@ exports.createVorhaben = function(request, response){
         response.send(result);
       }
     });
-}
+};
+
+// getVorhaben
+
+exports.getVorhaben = function(request, response){
+    
+  db().collection(collection).find().toArray(function (err, words) {
+    if (err) {
+      response.status(500).send(err);
+    } else {
+      response.json(words);
+    }
+  });
+    
+};
