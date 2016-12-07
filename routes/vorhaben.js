@@ -32,6 +32,13 @@ exports.getVorhaben = function(request, response){
     
 };
 
+exports.deleteVorhaben = function(request, response) {
+    var name = request.body.name;
+
+    db().collection(collection).deleteOne({ name : name }, function(err, result) {
+        response.send(result);
+      });
+};
 
 exports.updateVorhaben = function(request, response){
 

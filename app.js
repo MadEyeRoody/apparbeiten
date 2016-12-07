@@ -93,6 +93,7 @@ app.delete('/api/deleteComment', comment.deleteComment);
 app.post('/api/createVorhaben', vorhaben.createVorhaben);
 app.post('/api/updateVorhaben', vorhaben.updateVorhaben);
 app.get('/api/getVorhaben', vorhaben.getVorhaben);
+app.delete('/api/deleteVorhaben', vorhaben.deleteVorhaben)
 
 // user crud
 app.get('/api/users/:username', user.getUserByName);

@@ -21,7 +21,8 @@ import {PickPersonsPage} from "../modals/pickPersons/pickPersons";
     TaskModalPage,
     CreateTaskPage,
     PickPersonsPage,
-    VorhabenDetailsPage
+    VorhabenDetailsPage,
+    CreateVorhabenPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +37,8 @@ import {PickPersonsPage} from "../modals/pickPersons/pickPersons";
     TaskModalPage,
     CreateTaskPage,
     PickPersonsPage,
-    VorhabenDetailsPage
+    VorhabenDetailsPage,
+    CreateVorhabenPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

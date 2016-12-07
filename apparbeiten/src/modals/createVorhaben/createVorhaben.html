@@ -18,9 +18,14 @@
     <ion-input type="text" placeholder="Name des Vorgangs" [(ngModel)]="data.name"></ion-input>
   </ion-item>
 
-    <ion-item>
+  <ion-item>
     <ion-label color="primary" stacked>Beschreibung</ion-label>
     <ion-input type="text" placeholder="Beschreibung des Vorgangs" [(ngModel)]="data.beschreibung"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Bild</ion-label>
+    <ion-input type="text" placeholder="Bild-URL" [(ngModel)]="data.image"></ion-input>
   </ion-item>
 
 <ion-list>
@@ -28,7 +33,7 @@
     <ion-icon name="people"></ion-icon> Teilnehmer hinzufügen
   </ion-list-header>
   <ion-item *ngFor="let user of users">
-    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+    <ion-checkbox (click)="addOrRemovePerson(user)"></ion-checkbox>
     <ion-avatar item-left>
       <img src="{{user.image}}">
     </ion-avatar>
