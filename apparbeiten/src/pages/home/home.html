@@ -39,7 +39,7 @@
 
       <p item-right>
         <ion-note item-right>Follow</ion-note>
-        <ion-toggle item-right [ngModel]="aufgabe.isactive" ></ion-toggle>
+        <ion-toggle item-right [ngModel]="aufgabe.selected" (click)="toggleAufgabe(aufgabe, aufgabe.selected)"></ion-toggle>
       </p>
     </ion-item>
   </ion-list>
@@ -64,7 +64,7 @@
 
           <p item-right>
             <ion-note item-right>Follow</ion-note>
-            <ion-toggle item-right checked="{{task.isactive}}"></ion-toggle>
+            <ion-toggle item-right checked="true"></ion-toggle>
           </p>
     </ion-item>
 
@@ -96,7 +96,7 @@
 
       <p item-right>
         <ion-note item-right>Follow</ion-note>
-        <ion-toggle item-right checked="{{aufgabe.isactive}}"></ion-toggle>
+        <ion-toggle item-right [ngModel]="aufgabe.selected" (change)="toggleAufgabe(aufgabe, aufgabe.selected)"></ion-toggle>
       </p>
     </ion-item>
 </ion-list>

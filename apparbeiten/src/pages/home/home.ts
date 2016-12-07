@@ -18,11 +18,12 @@ export class HomePage {
   tasks: Array<any>;
   aufgaben: Array<any>;
 
-  meinName: 'John Snow';
+  meinUser; // John Snow
 
   constructor(public modalCtrl: ModalController,  private appService: AppService, 
         public navCtrl: NavController,
         public actionSheetCtrl: ActionSheetController) {
+
 
       this.appService.getVorhaben().subscribe(
           data => {
@@ -34,7 +35,46 @@ export class HomePage {
           () => console.log('Complete')
       );
 
+      this.meinUser = {
+        username: "John Snow",
+        role: "Beobachter",
+        email: "john@nightwatch.com",
+        image: "http://pixel.nymag.com/imgs/daily/vulture/2015/09/15/15-kit-harington-got-snow.w529.h529.jpg",
+        unternehmen: "Teambank"
+      };
       //this.refresh(null);
+  }
+
+  toggleAufgabe(clickedAufgabe, selected) {
+    var aktiveVorhaben;
+
+    console.info('toggleAufgabe', clickedAufgabe, selected);
+
+    //clickedAufgabe.selected = !selected;
+
+    if (!selected) {
+        this.tasks.forEach((vorhaben) => {
+          if (vorhaben.aufgaben) {
+              vorhaben.aufgaben.forEach((aufgabe) => {
+                if (aufgabe.name == clickedAufgabe.name) {
+                    aktiveVorhaben = vorhaben;
+
+                    if (aufgabe.beteiligtePersonen) {
+                      aufgabe.beteiligtePersonen.push(this.meinUser);
+                    } else {
+                      aufgabe.beteiligtePersonen = [this.meinUser];
+                    } 
+
+                    console.info("aktiveVorhaben", aktiveVorhaben);
+                    this.appService.updateVorhaben(aktiveVorhaben);
+                    this.refresh(null);
+                }
+              })
+          }
+        });
+    }
+    
+    
   }
 
   setVerschiedeneTasks(data) {
@@ -51,10 +91,12 @@ export class HomePage {
 
           if (element.beteiligtePersonen) {
             element.beteiligtePersonen.forEach((x) => {
-              if (x.name == this.meinName)
+              if (x && x.username == this.meinUser.username)
                 isMember = true;
             });
           }
+
+          element.selected = isMember;
 
           if (i < 4 && !isMember) {
             i++;
@@ -70,7 +112,7 @@ export class HomePage {
 
   refresh(refresher) {
 
-      this.appService.getVorhabenPoll().subscribe(
+      this.appService.getVorhaben().subscribe(
               data => {
                   this.setVerschiedeneTasks(data);
                   if (refresher)
