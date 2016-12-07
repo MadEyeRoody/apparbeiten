@@ -18,8 +18,26 @@
 
 <ion-content padding>
   <ion-list>
+ 
+    <ion-list-header>Zuletzt aktualisiert</ion-list-header>
 
-    <ion-list-header>Heute</ion-list-header>
+    <ion-item *ngFor="let task of tasks" detail-push >
+          <ion-avatar item-left>
+            <img src="{{task.image}}">
+          </ion-avatar>
+
+          <ion-label item-right>
+            <h2>{{task.name}} <ion-icon name="thumbs-up" color="primary"></ion-icon> <ion-note item-right>{{task.scope}}</ion-note></h2>
+            <p>{{task.beschreibung}}</p>
+            <p><ion-note item-right>{{task.unternehmen}}</ion-note></p>
+          </ion-label>
+
+          <p item-right>
+            <ion-note item-right>Follow</ion-note>
+            <ion-toggle item-right checked="{{task.isactive}}"></ion-toggle>
+          </p>
+    </ion-item>
+
 
     <button ion-item  (click)="openModal({charNum: 0})">
       <ion-icon name="boat" item-left></ion-icon>
@@ -41,15 +59,16 @@
 
   <ion-list>
 
-    <ion-list-header>Gestern</ion-list-header>
+    <ion-list-header>Neue Aufgaben</ion-list-header>
 
-    <ion-item>
-      <ion-avatar item-left>
-        <img src="assets/img/avatar-ts-hamm.png">
-      </ion-avatar>
-      <h2>Hamm</h2>
-      <p>You heard of Kung Fu? Well get ready for pork chop.</p>
-      <ion-note item-right>11:11</ion-note>
+    <ion-item *ngFor="let aufgabe of aufgaben" detail-push>
+      <ion-icon name="done-all" item-left></ion-icon>
+      <h2>{{aufgabe.name}}       <ion-note item-right>{{aufgabe.endDatum}}</ion-note></h2>
+
+      <p item-right>
+        <ion-note item-right>Follow</ion-note>
+        <ion-toggle item-right checked="{{aufgabe.isactive}}"></ion-toggle>
+      </p>
     </ion-item>
 </ion-list>
 

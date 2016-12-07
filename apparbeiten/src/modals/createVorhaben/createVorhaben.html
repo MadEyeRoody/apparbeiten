@@ -6,7 +6,7 @@
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="close-circle" hideWhen="ios"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -26,6 +26,24 @@
   <ion-item>
     <ion-label color="primary" stacked>Bild</ion-label>
     <ion-input type="text" placeholder="Bild-URL" [(ngModel)]="data.image"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Öffentlich</ion-label>
+    <ion-toggle item-right checked="{{data.ispublic}}"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Sichtbarkeit</ion-label>
+    <ion-select [(ngModel)]="data.scope" placeholder="bitte wählen" >
+      <ion-option value="intern">
+            <ion-icon name="lock"></ion-icon>
+            Intern</ion-option>
+      <ion-option value="verbundweit">
+        Verbund</ion-option>
+      <ion-option value="öffentlich">
+        Extern</ion-option>
+    </ion-select>
   </ion-item>
 
 <ion-list>

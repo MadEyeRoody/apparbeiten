@@ -15,7 +15,7 @@ export class CreateVorhabenPage {
   users;
   data;
   selectedPersons:Array<any>;
-  
+
   constructor(
     public platform: Platform,
     public params: NavParams,
@@ -28,6 +28,7 @@ export class CreateVorhabenPage {
     this.data.name = '';
     this.data.users = [];
     this.data.beschreibung = '';
+    this.data.aufgaben = [];
     this.selectedPersons = [{}];
     this.refresh();
   }
