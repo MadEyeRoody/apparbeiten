@@ -3,6 +3,7 @@
  */
 import { Component } from '@angular/core';
 import {AppService} from "../../pages/service/appService";
+import {ViewController} from "ionic-angular/index";
 
 @Component({
   templateUrl: 'pickPersons.html',
@@ -12,9 +13,10 @@ export class PickPersonsPage {
  persons: Array<any>;
   selectedPersons:Array<any>;
 
-  constructor(private appService: AppService)
+  constructor(private appService: AppService,  public viewCtrl: ViewController)
   {
     this.loadPersons();
+    this.selectedPersons=[{}];
   }
 
   loadPersons() {
@@ -36,9 +38,15 @@ export class PickPersonsPage {
     if(index > -1) {
       this.selectedPersons.splice(index, 1);
       person.selected = false;
+      console.log("removed");
     } else {
       this.selectedPersons.push(person);
       person.selected = true;
+      console.log("added");
     }
+  }
+
+  closePersonPicker(){
+    this.viewCtrl.dismiss(this.selectedPersons);
   }
 }

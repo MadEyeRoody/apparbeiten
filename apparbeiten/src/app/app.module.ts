@@ -9,6 +9,7 @@ import { TaskModalPage } from '../modals/task/task-modal'; //VorhabenDetailsPage
 import { VorhabenDetailsPage } from '../pages/vorhaben-details/vorhaben-details';
 import { CreateTaskPage } from '../modals/createTask/createTask';
 import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
+import {PickPersonsPage} from "../modals/pickPersons/pickPersons";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    CreateVorhabenPage,
+    PickPersonsPage
     VorhabenDetailsPage
   ],
   imports: [
@@ -34,7 +35,7 @@ import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    CreateVorhabenPage,
+    PickPersonsPage
     VorhabenDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]

@@ -33,10 +33,15 @@
     <ion-datetime displayFormat="DD MMM YYYY" name="dueTime" ></ion-datetime>
   </ion-item>
 
-  <button ion-button block outline icon-right onclick="openPersonSelector()">Beteiligte Personen hinzufügen<ion-icon name="arrow-forward"> </ion-icon></button>
+  <br><br>
+  <button ion-button *ngFor="let person of selectedPersons">
+    {{person.username}}
+  </button>
+
+  <button ion-button block outline icon-right (click)="openPersonSelector()">Beteiligte Personen hinzufügen<ion-icon name="arrow-forward"> </ion-icon></button>
 
   <br><br>
   <br><br>
-  <button ion-button full color="secondary" onclick="saveTask()">Speichern</button>
+  <button ion-button full color="secondary" (click)="saveTask()">Speichern</button>
 
 </ion-content>

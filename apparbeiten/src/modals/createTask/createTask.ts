@@ -16,6 +16,7 @@ export class CreateTaskPage {
   newTask;
   tasks: Array<any>;
   vorhaben: Array<any>;
+  selectedPersons:Array<any>;
 
 
   constructor(
@@ -77,6 +78,8 @@ export class CreateTaskPage {
     let modal = this.modalCtrl.create(PickPersonsPage);
 
     modal.present();
+
+    modal.onDidDismiss(data=> this.selectedPersons=data)
   }
 }
 /**
