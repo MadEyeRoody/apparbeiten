@@ -33,6 +33,15 @@ export class CreateTaskPage {
   ) {
 
     this.refresh(null);
+
+    this.platform.registerBackButtonAction(() => {
+      try {
+        this.viewCtrl.dismiss()
+      }
+      catch(e) {
+        console.log(e)
+      }
+    })
   }
 
   saveTask(){
@@ -43,7 +52,7 @@ export class CreateTaskPage {
         endDatum: this.dueDate,
         beteiligtePersonen:this.selectedPersons
       }
-    
+
 
 
 
@@ -130,6 +139,8 @@ export class CreateTaskPage {
     });
     toast.present();
   }
+
+
 
 }
 /**

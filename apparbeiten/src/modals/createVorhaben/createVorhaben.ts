@@ -32,6 +32,15 @@ export class CreateVorhabenPage {
     this.data.aufgaben = [];
     this.selectedPersons = [{}];
     this.refresh();
+
+    this.platform.registerBackButtonAction(() => {
+      try {
+        this.viewCtrl.dismiss()
+      }
+      catch(e) {
+        console.log(e)
+      }
+    })
   }
 
   addOrRemovePerson(person){

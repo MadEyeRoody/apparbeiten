@@ -3,7 +3,7 @@
  */
 import { Component } from '@angular/core';
 import {AppService} from "../../pages/service/appService";
-import {ViewController} from "ionic-angular/index";
+import {ViewController, Platform} from "ionic-angular/index";
 
 @Component({
   templateUrl: 'pickPersons.html',
@@ -13,10 +13,19 @@ export class PickPersonsPage {
  persons: Array<any>;
   selectedPersons:Array<any>;
 
-  constructor(private appService: AppService,  public viewCtrl: ViewController)
+  constructor(private appService: AppService,  public viewCtrl: ViewController, public platform: Platform,)
   {
     this.loadPersons();
     this.selectedPersons=[];
+
+    this.platform.registerBackButtonAction(() => {
+      try {
+        this.viewCtrl.dismiss()
+      }
+      catch(e) {
+        console.log(e)
+      }
+    })
   }
 
   loadPersons() {
