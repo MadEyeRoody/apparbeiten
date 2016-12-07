@@ -18,36 +18,70 @@ export class HomePage {
   tasks: Array<any>;
   aufgaben: Array<any>;
 
+  meinName: 'John Snow';
+
   constructor(public modalCtrl: ModalController,  private appService: AppService, 
         public navCtrl: NavController,
         public actionSheetCtrl: ActionSheetController) {
 
-    this.appService.getVorhaben().subscribe(
+      this.appService.getVorhaben().subscribe(
           data => {
-              let i = 0;
-              this.tasks = data;
-              this.favTasks = [];
-              this.aufgaben = []; 
-              data.forEach((ele) => {
-                  if (ele.aufgaben) {
-                    ele.aufgaben.forEach(element => {
-                      i++;
-
-                      if (i < 4)
-                        this.favTasks.push(element);
-                      else 
-                        this.aufgaben.push(element);
-                    });
-                  }
-              })
-              console.log("data:", data);
+              this.setVerschiedeneTasks(data);
           },
           err => {
               console.log(err);
           },
           () => console.log('Complete')
-
       );
+
+      //this.refresh(null);
+  }
+
+  setVerschiedeneTasks(data) {
+    let i = 0;
+    this.tasks = data;
+    this.favTasks = [];
+    this.aufgaben = [];
+    data.forEach((ele) => {
+      if (ele.aufgaben) {
+        ele.aufgaben.forEach(element => {
+          i++;
+
+          let isMember = false;
+
+          if (element.beteiligtePersonen) {
+            element.beteiligtePersonen.forEach((x) => {
+              if (x.name == this.meinName)
+                isMember = true;
+            });
+          }
+
+          if (i < 4 && !isMember) {
+            i++;
+            this.favTasks.push(element);
+          }
+          else if (isMember)
+            this.aufgaben.push(element);
+        });
+        }
+    })
+    console.log("data:", data);
+  }
+
+  refresh(refresher) {
+
+      this.appService.getVorhabenPoll().subscribe(
+              data => {
+                  this.setVerschiedeneTasks(data);
+                  if (refresher)
+                    refresher.complete();
+              },
+              err => {
+                  console.log(err);
+              },
+              () => console.log('Complete')
+
+          );
   }
 
   nav(data) {
@@ -57,7 +91,6 @@ export class HomePage {
   }
 
   openModal(item) {
-
     let modal = this.modalCtrl.create(TaskModalPage, item);
     modal.present();
   }
