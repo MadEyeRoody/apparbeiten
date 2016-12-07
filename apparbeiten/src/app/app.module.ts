@@ -5,6 +5,8 @@ import { AboutPage } from '../pages/vorhaben/vorhaben';
 import { ContactPage } from '../pages/aufgaben/aufgaben';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { TaskModalPage } from '../modals/task/task-modal';
+import { CreateTaskPage } from '../modals/createTask/createTask'
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    TaskModalPage,
+    CreateTaskPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +27,9 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    TaskModalPage,
+    CreateTaskPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

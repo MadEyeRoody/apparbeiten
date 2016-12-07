@@ -21,7 +21,7 @@
 
     <ion-list-header>Heute</ion-list-header>
 
-    <button ion-item  (click)="itemTapped($event, item)">
+    <button ion-item  (click)="openModal({charNum: 0})">
       <ion-icon name="boat" item-left></ion-icon>
       <h2>Protokoll zum 01.12.16</h2>
       <p>Hans Meyer hat diese Aufgabe fertiggestellt!</p>
@@ -58,7 +58,7 @@
     <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">
       <button ion-fab><ion-icon name="calendar"></ion-icon></button>
-      <button ion-fab><ion-icon name="done-all"></ion-icon></button>
+      <button ion-fab (click)="createTask()"><ion-icon name="done-all"></ion-icon></button>
       <button ion-fab><ion-icon name="briefcase"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>

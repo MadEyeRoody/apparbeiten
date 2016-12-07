@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { TaskModalPage } from '../../modals/task/task-modal';
+import { CreateTaskPage } from '../../modals/createTask/createTask'
+import {ModalController} from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -8,12 +10,21 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public modalCtrl: ModalController) {
 
   }
 
-  itemTabbed(event,item){
+  openModal(item) {
 
+    let modal = this.modalCtrl.create(TaskModalPage, item);
+    modal.present();
+  }
+
+  createTask(){
+    let modal = this.modalCtrl.create(CreateTaskPage);
+
+    modal.present();
   }
 
 }
+
