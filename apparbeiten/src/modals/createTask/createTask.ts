@@ -50,7 +50,7 @@ export class CreateTaskPage {
     if (this.vorhaben.aufgaben != null)
     this.vorhaben.aufgaben.push(task);
     else
-    this.vorhaben.aufgaben = task;
+    this.vorhaben.aufgaben = [task];
 
     console.log(JSON.stringify(this.vorhaben));
 
