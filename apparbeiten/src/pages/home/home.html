@@ -35,12 +35,21 @@
 
     <ion-item *ngFor="let aufgabe of favTasks" detail-push>
       <ion-icon name="done-all" item-left></ion-icon>
-      <h2>{{aufgabe.name}}       <ion-note item-right>{{aufgabe.endDatum}}</ion-note></h2>
-
-      <p item-right>
+      <ion-label>
+        <h2>{{aufgabe.name}}</h2>
+        <ion-note item-right>{{aufgabe.endDatum}}</ion-note>
+        <p>
+          <span *ngFor="let person of aufgabe.beteiligtePersonen" style="float:left;display:inline-block;">
+            <ion-avatar floating>
+              <img src="{{person.image}}">
+            </ion-avatar>
+          </span>
+        </p>
+      </ion-label>
+      <div item-right>
         <ion-note item-right>Follow</ion-note>
         <ion-toggle item-right [ngModel]="aufgabe.selected" (click)="toggleAufgabe(aufgabe, aufgabe.selected)"></ion-toggle>
-      </p>
+      </div>
     </ion-item>
   </ion-list>
 
@@ -90,7 +99,7 @@
   <ion-list>
     <ion-list-header><ion-icon name="cafe" item-left></ion-icon>Meine Aufgaben</ion-list-header>
 
-    <ion-item *ngFor="let aufgabe of aufgaben" detail-push>
+    <!--<ion-item *ngFor="let aufgabe of aufgaben" detail-push>
       <ion-icon name="done-all" item-left></ion-icon>
       <h2>{{aufgabe.name}}       <ion-note item-right>{{aufgabe.endDatum}}</ion-note></h2>
 
@@ -98,6 +107,25 @@
         <ion-note item-right>Follow</ion-note>
         <ion-toggle item-right [ngModel]="aufgabe.selected" (change)="toggleAufgabe(aufgabe, aufgabe.selected)"></ion-toggle>
       </p>
+    </ion-item>-->
+
+    <ion-item *ngFor="let aufgabe of aufgaben" detail-push>
+      <ion-icon name="done-all" item-left></ion-icon>
+      <ion-label>
+        <h2>{{aufgabe.name}}</h2>
+        <ion-note item-right>{{aufgabe.endDatum}}</ion-note>
+        <p>
+          <!--<span *ngFor="let person of aufgabe.beteiligtePersonen" style="float:left;display:inline-block;">
+            <ion-avatar floating>
+              <img src="{{person.image}}">
+            </ion-avatar>
+          </span>-->
+        </p>
+      </ion-label>
+      <div item-right>
+        <ion-note item-right>Follow</ion-note>
+        <ion-toggle item-right [ngModel]="aufgabe.selected" (click)="toggleAufgabe(aufgabe, aufgabe.selected)"></ion-toggle>
+      </div>
     </ion-item>
 </ion-list>
 

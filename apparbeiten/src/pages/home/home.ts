@@ -109,7 +109,7 @@ export class HomePage {
             i++;
             this.favTasks.push(element);
           }
-          else if (isMember)
+          else //if (isMember)
             this.aufgaben.push(element);
         });
         }
