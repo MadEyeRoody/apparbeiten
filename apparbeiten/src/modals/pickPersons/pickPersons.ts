@@ -3,7 +3,7 @@
  */
 import { Component } from '@angular/core';
 import {AppService} from "../../pages/service/appService";
-import {ViewController, Platform} from "ionic-angular/index";
+import {ViewController, Platform, NavParams} from "ionic-angular/index";
 
 @Component({
   templateUrl: 'pickPersons.html',
@@ -13,9 +13,9 @@ export class PickPersonsPage {
  persons: Array<any>;
   selectedPersons:Array<any>;
 
-  constructor(private appService: AppService,  public viewCtrl: ViewController, public platform: Platform,)
+  constructor(private appService: AppService,  public viewCtrl: ViewController, public platform: Platform,public params: NavParams)
   {
-    this.loadPersons();
+   // this.loadPersons();
     this.selectedPersons=[];
 
     this.platform.registerBackButtonAction(() => {
@@ -26,6 +26,14 @@ export class PickPersonsPage {
         console.log(e)
       }
     })
+
+
+
+    if(this.params.get('users')!= 'noUsers'){
+      this.persons=this.params.get('users');
+    }else{
+      this.loadPersons();
+    }
   }
 
   loadPersons() {

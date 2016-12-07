@@ -46,19 +46,18 @@
     </ion-select>
   </ion-item>
 
-<ion-list>
-  <ion-list-header>
-    <ion-icon name="people"></ion-icon> Teilnehmer hinzufügen
-  </ion-list-header>
-  <ion-item *ngFor="let user of users">
-    <ion-checkbox (click)="addOrRemovePerson(user)"></ion-checkbox>
+  <span><h3>Beteiligte Personen:</h3></span>
+
+  <button ion-item *ngFor="let person of selectedPersons">
     <ion-avatar item-left>
-      <img src="{{user.image}}">
+      <img src="{{person.image}}">
     </ion-avatar>
-    <ion-label>{{user.username}}</ion-label>
-    <ion-note item-right>{{user.unternehmen}}</ion-note>
-  </ion-item>
-</ion-list>
+    <ion-label>{{person.username}}</ion-label>
+    <ion-note item-right>{{person.unternehmen}}</ion-note>
+
+  </button>
+
+  <button ion-button block outline icon-right (click)="openPersonSelector()">Beteiligte Personen hinzufügen<ion-icon name="arrow-forward"> </ion-icon></button>
 
 
 

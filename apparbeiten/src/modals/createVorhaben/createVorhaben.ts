@@ -1,10 +1,11 @@
 /**
  * Created by roody on 07.12.16.
  */
-import {Platform, NavParams, ViewController, ToastController} from 'ionic-angular';
+import {Platform, NavParams, ViewController, ToastController, ModalController} from 'ionic-angular';
 import { Component } from '@angular/core';
 import { AppService } from '../../pages/service/appService';
 import {Http} from '@angular/http';
+import {PickPersonsPage} from "../pickPersons/pickPersons";
 
 @Component({
   templateUrl: 'createVorhaben.html',
@@ -22,6 +23,7 @@ export class CreateVorhabenPage {
     public viewCtrl: ViewController,
     private appService: AppService,
     private http: Http,
+    private modalCtrl: ModalController,
     public toastCtrl: ToastController
   ) {
 
@@ -30,7 +32,7 @@ export class CreateVorhabenPage {
     this.data.users = [];
     this.data.beschreibung = '';
     this.data.aufgaben = [];
-    this.selectedPersons = [{}];
+    this.selectedPersons = [];
     this.refresh();
 
     this.platform.registerBackButtonAction(() => {
@@ -101,6 +103,16 @@ export class CreateVorhabenPage {
       duration: 3000
     });
     toast.present();
+  }
+
+  openPersonSelector(){
+    let modal = this.modalCtrl.create(PickPersonsPage);
+
+    modal.present();
+
+    modal.onDidDismiss(data=> this.selectedPersons=data)
+
+
   }
 }
 /**
