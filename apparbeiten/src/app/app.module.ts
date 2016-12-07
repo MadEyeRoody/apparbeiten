@@ -5,7 +5,8 @@ import { AboutPage } from '../pages/vorhaben/vorhaben';
 import { ContactPage } from '../pages/aufgaben/aufgaben';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TaskModalPage } from '../modals/task/task-modal';
+import { TaskModalPage } from '../modals/task/task-modal'; //VorhabenDetailsPage
+import { VorhabenDetailsPage } from '../pages/vorhaben-details/vorhaben-details';
 import { CreateTaskPage } from '../modals/createTask/createTask';
 import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
 
@@ -18,7 +19,8 @@ import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    CreateVorhabenPage
+    CreateVorhabenPage,
+    VorhabenDetailsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,7 +34,8 @@ import { CreateVorhabenPage } from '../modals/createVorhaben/createVorhaben';
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    CreateVorhabenPage
+    CreateVorhabenPage,
+    VorhabenDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

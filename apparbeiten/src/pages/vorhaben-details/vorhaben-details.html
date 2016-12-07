@@ -1,0 +1,60 @@
+<!--
+  Generated template for the VorhabenDetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon name="briefcase"></ion-icon> Vorhaben {{task.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-card>
+      <ion-card-header>
+
+        <h2>
+        <!--<ion-avatar item-left>
+          <img src="{{task.image}}">
+        </ion-avatar>-->
+          {{task.name}}
+        </h2>
+        <ion-note item-right>{{task.unternehmen}}</ion-note>
+      </ion-card-header>
+      <ion-card-content>
+        {{task.beschreibung}}
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-list>
+      <ion-list-header>
+        <ion-icon name="people"></ion-icon> Mitglieder
+      </ion-list-header>
+
+        <ion-item  ion-item *ngFor="let user of task.users" detail-push>
+                <ion-avatar item-left>
+                  <img src="{{user.image}}">
+                </ion-avatar>
+                <h2>{{user.username}}</h2>
+                <p>{{user.role}}</p>
+                <ion-note item-right>{{user.unternehmen}}</ion-note>
+          </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-icon name="done-all"></ion-icon> Aufgaben
+      </ion-list-header>
+
+        <ion-item  ion-item *ngFor="let aufgabe of task.aufgaben" detail-push>
+                <h2>{{aufgabe.name}}</h2>
+          </ion-item>
+    </ion-list>
+
+</ion-content>

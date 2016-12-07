@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { NavController } from 'ionic-angular';
 import { AppService } from '../service/appService';
+import { ActionSheetController } from 'ionic-angular';
+import { VorhabenDetailsPage } from '../vorhaben-details/vorhaben-details';
 
 @Component({
   selector: 'page-about',
@@ -11,9 +13,44 @@ import { AppService } from '../service/appService';
 export class AboutPage {
 
   tasks: Array<any>;
+
+  nav(data) {
+    this.navCtrl.push(VorhabenDetailsPage, {
+    vorhaben: data
+    });
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Vorhaben bearbeiten',
+      buttons: [
+        {
+          text: 'Vorhaben veröffentlichen',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },{
+          text: 'Vorhaben bearbeiten',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },{
+          text: 'Vorhaben löschen',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
  
   refresh(refresher) {
-        this.appService.getVorhaben().subscribe(
+
+
+        this.appService.getVorhabenPoll().subscribe(
                 data => {
                     this.tasks = data; 
                     console.log("data:", data);
@@ -28,11 +65,22 @@ export class AboutPage {
             );
   }
 
-  constructor(public navCtrl: NavController, private appService: AppService) {
+  constructor(public navCtrl: NavController, private appService: AppService, public actionSheetCtrl: ActionSheetController) {
 
     this.refresh(null);
 
-//    this.tasks = this.appService.getVorhaben();
+    
+    this.appService.getVorhaben().subscribe(
+          data => {
+              this.tasks = data; 
+              console.log("data:", data);
+          },
+          err => {
+              console.log(err);
+          },
+          () => console.log('Complete')
+
+      );
 
   }
 

@@ -1,8 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Vorhaben
-    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Vorhaben</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -18,13 +28,16 @@
 -->
 
     <ion-list>
-        <button ion-item *ngFor="let task of tasks" detail-push>
+        <button (click)="nav(task)" ion-item *ngFor="let task of tasks" detail-push>
                 <ion-avatar item-left>
                   <img src="{{task.image}}">
                 </ion-avatar>
                 <h2>{{task.name}}</h2>
                 <p>{{task.beschreibung}}</p>
-                <ion-note item-right>{{task.unternehmen}}</ion-note>
+                <p><ion-note item-right>{{task.unternehmen}}</ion-note></p>
+                <button item-right ion-button icon-only clear (click)="presentActionSheet()">
+                  <ion-icon name="more"></ion-icon>
+                </button>
           </button>
     </ion-list>
     <!--</ion-refresher-content>-->

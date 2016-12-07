@@ -47,7 +47,7 @@ export class CreateVorhabenPage {
 
   save() {
 
-      var link = 'http://localhost:3000/api/createVorhaben';//'http://apparbeiten.eu-gb.mybluemix.net/api/createVorhaben';
+      var link = 'http://apparbeiten.eu-gb.mybluemix.net/api/createVorhaben';
         var data = {'vorhaben': this.data};//JSON.stringify({'vorhaben': this.data});
         
         console.log('data to post:', {'vorhaben': this.data});
