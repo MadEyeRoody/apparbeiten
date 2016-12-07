@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { NavController } from 'ionic-angular';
+import {NavController, ModalController} from 'ionic-angular';
 import { AppService } from '../service/appService';
 import { ActionSheetController } from 'ionic-angular';
 import { VorhabenDetailsPage } from '../vorhaben-details/vorhaben-details';
+import {CreateTaskPage} from "../../../.tmp/modals/createTask/createTask";
+import {CreateVorhabenPage} from "../../modals/createVorhaben/createVorhaben";
 
 @Component({
   selector: 'page-about',
@@ -46,13 +48,13 @@ export class AboutPage {
     });
     actionSheet.present();
   }
- 
+
   refresh(refresher) {
 
 
         this.appService.getVorhabenPoll().subscribe(
                 data => {
-                    this.tasks = data; 
+                    this.tasks = data;
                     console.log("data:", data);
                     if (refresher)
                       refresher.complete();
@@ -65,14 +67,18 @@ export class AboutPage {
             );
   }
 
-  constructor(public navCtrl: NavController, private appService: AppService, public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController,
+              private appService: AppService,
+              public actionSheetCtrl: ActionSheetController,
+              private modalCtrl: ModalController
+  ) {
 
     this.refresh(null);
 
-    
+
     this.appService.getVorhaben().subscribe(
           data => {
-              this.tasks = data; 
+              this.tasks = data;
               console.log("data:", data);
           },
           err => {
@@ -82,6 +88,18 @@ export class AboutPage {
 
       );
 
+  }
+
+  createTask(){
+    let modal = this.modalCtrl.create(CreateTaskPage);
+
+    modal.present();
+  }
+
+  createVorhaben(){
+    let modal = this.modalCtrl.create(CreateVorhabenPage);
+
+    modal.present();
   }
 
 }

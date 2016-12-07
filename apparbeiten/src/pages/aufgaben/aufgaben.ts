@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {NavController, ModalController} from 'ionic-angular';
+import {CreateVorhabenPage} from "../../modals/createVorhaben/createVorhaben";
+import {CreateTaskPage} from "../../../.tmp/modals/createTask/createTask";
 
 @Component({
   selector: 'page-contact',
@@ -8,8 +10,24 @@ import { NavController } from 'ionic-angular';
 })
 export class ContactPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController
+  ) {
 
   }
+
+  createTask(){
+    let modal = this.modalCtrl.create(CreateTaskPage);
+
+    modal.present();
+  }
+
+  createVorhaben(){
+    let modal = this.modalCtrl.create(CreateVorhabenPage);
+
+    modal.present();
+  }
+
 
 }
