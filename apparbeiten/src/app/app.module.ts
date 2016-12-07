@@ -20,7 +20,7 @@ import {PickPersonsPage} from "../modals/pickPersons/pickPersons";
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    PickPersonsPage
+    PickPersonsPage,
     VorhabenDetailsPage
   ],
   imports: [
@@ -35,7 +35,7 @@ import {PickPersonsPage} from "../modals/pickPersons/pickPersons";
     TabsPage,
     TaskModalPage,
     CreateTaskPage,
-    PickPersonsPage
+    PickPersonsPage,
     VorhabenDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
