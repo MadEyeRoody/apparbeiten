@@ -15,14 +15,14 @@
 <ion-content>
   <ion-item>
     <ion-label>Vorhaben</ion-label>
-    <ion-select  [(ngModel)]="vorhaben" >
-        <ion-option *ngFor="let task of tasks" value="{{task.name}}">{{task.name}}</ion-option>
+    <ion-select [(ngModel)]="vorhaben">
+        <ion-option *ngFor="let task of tasks" [value]="task">{{task.name}}</ion-option>
     </ion-select>
   </ion-item>
-  <br><br>
+  <br>
   <ion-item >
     <ion-label floating>Name der Aufgabe</ion-label>
-    <ion-input type="text" name="taskName" value=""></ion-input>
+    <ion-input type="text" ngModel="{{taskName}}" name="taskName"></ion-input>
   </ion-item >
 
   <br><br>
@@ -30,12 +30,20 @@
 
   <ion-item>
     <ion-label>Zu erledigen bis:</ion-label>
-    <ion-datetime displayFormat="DD MMM YYYY" name="dueTime" ></ion-datetime>
+    <ion-datetime displayFormat="DD MMM YYYY" name="dueTime" min="2016" max="2020" ngModel="{{dueDate}}" ></ion-datetime>
   </ion-item>
 
   <br><br>
-  <button ion-button *ngFor="let person of selectedPersons">
-    {{person.username}}
+
+    <span><h3>Beteiligte Personen:</h3></span>
+
+  <button ion-item *ngFor="let person of selectedPersons" (click)="changeRACI(person)">
+    <ion-avatar item-left>
+      <img src="{{person.image}}">
+    </ion-avatar>
+    <ion-label>{{person.username}}</ion-label>
+    <ion-note item-right>{{person.taskStatus}}</ion-note>
+
   </button>
 
   <button ion-button block outline icon-right (click)="openPersonSelector()">Beteiligte Personen hinzufügen<ion-icon name="arrow-forward"> </ion-icon></button>

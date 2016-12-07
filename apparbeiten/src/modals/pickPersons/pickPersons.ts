@@ -16,7 +16,7 @@ export class PickPersonsPage {
   constructor(private appService: AppService,  public viewCtrl: ViewController)
   {
     this.loadPersons();
-    this.selectedPersons=[{}];
+    this.selectedPersons=[];
   }
 
   loadPersons() {
@@ -40,6 +40,7 @@ export class PickPersonsPage {
       person.selected = false;
       console.log("removed");
     } else {
+      person.taskStatus = "Responsible";
       this.selectedPersons.push(person);
       person.selected = true;
       console.log("added");
