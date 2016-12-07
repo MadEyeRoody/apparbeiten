@@ -6,12 +6,37 @@
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="close-circle" hideWhen="ios"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <ion-item>
+    <ion-label>Vorhaben</ion-label>
+    <ion-select  [(ngModel)]="vorhaben" >
+        <ion-option *ngFor="let task of tasks" value="{{task.name}}">{{task.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <br><br>
+  <ion-item >
+    <ion-label floating>Name der Aufgabe</ion-label>
+    <ion-input type="text" name="taskName" value=""></ion-input>
+  </ion-item >
+
+  <br><br>
+
+
+  <ion-item>
+    <ion-label>Zu erledigen bis:</ion-label>
+    <ion-datetime displayFormat="DD MMM YYYY" name="dueTime" ></ion-datetime>
+  </ion-item>
+
+  <button ion-button block outline icon-right onclick="openPersonSelector()">Beteiligte Personen hinzufügen<ion-icon name="arrow-forward"> </ion-icon></button>
+
+  <br><br>
+  <br><br>
+  <button ion-button full color="secondary" onclick="saveTask()">Speichern</button>
+
 </ion-content>
