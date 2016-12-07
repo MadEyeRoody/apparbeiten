@@ -3,27 +3,40 @@ import { AppService } from '../service/appService';
 import { TaskModalPage } from '../../modals/task/task-modal';
 import { CreateTaskPage } from '../../modals/createTask/createTask'
 import { CreateVorhabenPage } from '../../modals/createVorhaben/createVorhaben'
-import {ModalController} from 'ionic-angular';
+import { ModalController, NavController} from 'ionic-angular';
+import { VorhabenDetailsPage } from '../vorhaben-details/vorhaben-details';
+import { ActionSheetController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: [AppService]
 })
+
 export class HomePage {
+  favTasks: Array<any>;
   tasks: Array<any>;
   aufgaben: Array<any>;
 
-  constructor(public modalCtrl: ModalController,  private appService: AppService) {
+  constructor(public modalCtrl: ModalController,  private appService: AppService, 
+        public navCtrl: NavController,
+        public actionSheetCtrl: ActionSheetController) {
 
     this.appService.getVorhaben().subscribe(
           data => {
+              let i = 0;
               this.tasks = data;
+              this.favTasks = [];
               this.aufgaben = []; 
               data.forEach((ele) => {
                   if (ele.aufgaben) {
                     ele.aufgaben.forEach(element => {
-                      this.aufgaben.push(element);
+                      i++;
+
+                      if (i < 4)
+                        this.favTasks.push(element);
+                      else 
+                        this.aufgaben.push(element);
                     });
                   }
               })
@@ -35,6 +48,12 @@ export class HomePage {
           () => console.log('Complete')
 
       );
+  }
+
+  nav(data) {
+    this.navCtrl.push(VorhabenDetailsPage, {
+    vorhaben: data
+    });
   }
 
   openModal(item) {

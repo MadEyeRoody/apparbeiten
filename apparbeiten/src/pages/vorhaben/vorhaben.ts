@@ -4,7 +4,7 @@ import {NavController, ModalController} from 'ionic-angular';
 import { AppService } from '../service/appService';
 import { ActionSheetController } from 'ionic-angular';
 import { VorhabenDetailsPage } from '../vorhaben-details/vorhaben-details';
-import {CreateTaskPage} from "../../../.tmp/modals/createTask/createTask";
+import {CreateTaskPage} from "../../modals/createTask/createTask";
 import {CreateVorhabenPage} from "../../modals/createVorhaben/createVorhaben";
 
 @Component({

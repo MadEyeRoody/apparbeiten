@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import {NavController, ModalController} from 'ionic-angular';
 import {CreateVorhabenPage} from "../../modals/createVorhaben/createVorhaben";
-import {CreateTaskPage} from "../../../.tmp/modals/createTask/createTask";
+import {CreateTaskPage} from "../../modals/createTask/createTask";
 
 @Component({
   selector: 'page-contact',

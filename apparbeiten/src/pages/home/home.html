@@ -17,16 +17,35 @@
 </ion-header>
 
 <ion-content padding>
+
+
+  <ion-list>
+    <ion-list-header><ion-icon name="heart" item-left></ion-icon>Interessant für mich</ion-list-header>
+
+    <ion-item *ngFor="let aufgabe of favTasks" detail-push>
+      <ion-icon name="done-all" item-left></ion-icon>
+      <h2>{{aufgabe.name}}       <ion-note item-right>{{aufgabe.endDatum}}</ion-note></h2>
+
+      <p item-right>
+        <ion-note item-right>Follow</ion-note>
+        <ion-toggle item-right [ngModel]="aufgabe.isactive" ></ion-toggle>
+      </p>
+    </ion-item>
+  </ion-list>
+
+
+
+
   <ion-list>
  
-    <ion-list-header>Zuletzt aktualisiert</ion-list-header>
+    <ion-list-header><ion-icon name="flame" item-left></ion-icon>Zuletzt aktualisiert</ion-list-header>
 
     <ion-item *ngFor="let task of tasks" detail-push >
           <ion-avatar item-left>
             <img src="{{task.image}}">
           </ion-avatar>
 
-          <ion-label item-right>
+          <ion-label item-right (click)="nav(task)">
             <h2>{{task.name}} <ion-icon name="thumbs-up" color="primary"></ion-icon> <ion-note item-right>{{task.scope}}</ion-note></h2>
             <p>{{task.beschreibung}}</p>
             <p><ion-note item-right>{{task.unternehmen}}</ion-note></p>
@@ -39,7 +58,7 @@
     </ion-item>
 
 
-    <button ion-item  (click)="openModal({charNum: 0})">
+    <!--<button ion-item  (click)="openModal({charNum: 0})">
       <ion-icon name="boat" item-left></ion-icon>
       <h2>Protokoll zum 01.12.16</h2>
       <p>Hans Meyer hat diese Aufgabe fertiggestellt!</p>
@@ -53,13 +72,12 @@
       <h2>Buzz Lightyear</h2>
       <p>My eyeballs could have been sucked from their sockets!</p>
       <ion-note item-right>1:12</ion-note>
-    </ion-item>
+    </ion-item>-->
 
   </ion-list>
 
   <ion-list>
-
-    <ion-list-header>Neue Aufgaben</ion-list-header>
+    <ion-list-header><ion-icon name="cafe" item-left></ion-icon>Meine Aufgaben</ion-list-header>
 
     <ion-item *ngFor="let aufgabe of aufgaben" detail-push>
       <ion-icon name="done-all" item-left></ion-icon>
