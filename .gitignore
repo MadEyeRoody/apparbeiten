@@ -1,3 +1,8 @@
 node_modules
 .vscode
 config
+.idea/*
+.idea/apparbeiten.iml
+.idea/modules.xml
+.idea/workspace.xml
+conf/
