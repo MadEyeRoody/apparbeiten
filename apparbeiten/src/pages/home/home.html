@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Aktivitäten</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-list-header>Heute</ion-list-header>
+
+    <button ion-item  (click)="itemTapped($event, item)">
+      <ion-icon name="boat" item-left></ion-icon>
+      <h2>Protokoll zum 01.12.16</h2>
+      <p>Hans Meyer hat diese Aufgabe fertiggestellt!</p>
+      <ion-note item-right>1:12</ion-note>
+    </button>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="assets/img/avatar-ts-buzz.png">
+      </ion-avatar>
+      <h2>Buzz Lightyear</h2>
+      <p>My eyeballs could have been sucked from their sockets!</p>
+      <ion-note item-right>1:12</ion-note>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+
+    <ion-list-header>Gestern</ion-list-header>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="assets/img/avatar-ts-hamm.png">
+      </ion-avatar>
+      <h2>Hamm</h2>
+      <p>You heard of Kung Fu? Well get ready for pork chop.</p>
+      <ion-note item-right>11:11</ion-note>
+    </ion-item>
+</ion-list>
+
+  <div ng-include src="'templates/fab/fab.html'"></div>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab><ion-icon name="calendar"></ion-icon></button>
+      <button ion-fab><ion-icon name="done-all"></ion-icon></button>
+      <button ion-fab><ion-icon name="briefcase"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
