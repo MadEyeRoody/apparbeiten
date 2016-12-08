@@ -106,7 +106,7 @@ export class CreateVorhabenPage {
   }
 
   openPersonSelector(){
-    let modal = this.modalCtrl.create(PickPersonsPage);
+    let modal = this.modalCtrl.create(PickPersonsPage, {users: 'noUsers'});
 
     modal.present();
 

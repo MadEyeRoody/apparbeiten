@@ -92,9 +92,8 @@ export class HomePage {
     data.forEach((ele) => {
       if (ele.aufgaben) {
         ele.aufgaben.forEach(element => {
-          i++;
 
-          let isMember = false;
+          var isMember = false;
 
           if (element.beteiligtePersonen) {
             element.beteiligtePersonen.forEach((x) => {

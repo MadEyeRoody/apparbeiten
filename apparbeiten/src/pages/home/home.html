@@ -66,7 +66,7 @@
           </ion-avatar>
 
           <ion-label item-right (click)="nav(task)">
-            <h2>{{task.name}} <ion-icon name="thumbs-up" color="primary"></ion-icon> <ion-note item-right>{{task.scope}}</ion-note></h2>
+            <h2>{{task.name}} <ion-note item-right>{{task.scope}}</ion-note></h2>
             <p>{{task.beschreibung}}</p>
             <p><ion-note item-right>{{task.unternehmen}}</ion-note></p>
           </ion-label>
@@ -115,11 +115,11 @@
         <h2>{{aufgabe.name}}</h2>
         <ion-note item-right>{{aufgabe.endDatum}}</ion-note>
         <p>
-          <!--<span *ngFor="let person of aufgabe.beteiligtePersonen" style="float:left;display:inline-block;">
+          <span *ngFor="let person of aufgabe.beteiligtePersonen" style="float:left;display:inline-block;margin-left:5px;">
             <ion-avatar floating>
               <img src="{{person.image}}">
             </ion-avatar>
-          </span>-->
+          </span>
         </p>
       </ion-label>
       <div item-right>
