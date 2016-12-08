@@ -48,6 +48,8 @@ exports.updateVorhaben = function(request, response){
 
     db().collection(collection).updateOne({ name : vorhaben.name }
     , { $set: {
+         scope: vorhaben.scope,
+         beschreibung: vorhaben.beschreibung,
          users : vorhaben.users, 
          aufgaben : vorhaben.aufgaben
     } }, 
