@@ -24,7 +24,7 @@ tasks:Array<any>;
 
   }
 
-  loadVorhaben() {
+  loadVorhaben(refresher?) {
 
     this.appService.getVorhaben().subscribe(
       data => {
@@ -47,6 +47,8 @@ tasks:Array<any>;
         this.tasks=dingens;
 
 
+        if (refresher)
+          refresher.complete();
 
         console.log("data:", data);
       },
