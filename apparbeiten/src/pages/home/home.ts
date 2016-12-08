@@ -11,7 +11,7 @@ import { ActionSheetController } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [AppService,]
+  providers: [AppService]
 })
 
 export class HomePage {

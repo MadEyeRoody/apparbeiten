@@ -18,8 +18,19 @@
 </ion-header>
 
 <ion-content>
+    <ion-list *ngFor="let task of tasks.aufgaben">
+      <ion-card>
+        <ion-card-title>
+          <ion-label>{{task.name}}</ion-label>
+          <ion-note item-right>{{task.dueDate}}</ion-note>
+        </ion-card-title>
+        <ion-card-content>
 
+        </ion-card-content>
 
+      </ion-card>
+
+      </ion-list>
 
   <!-- Here Fab Button -->
   <ion-fab right bottom>
