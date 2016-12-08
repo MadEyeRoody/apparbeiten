@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {NavController, ModalController} from 'ionic-angular';
+import {NavController, ModalController, AlertController} from 'ionic-angular';
 import {CreateVorhabenPage} from "../../modals/createVorhaben/createVorhaben";
 import {CreateTaskPage} from "../../modals/createTask/createTask";
 import { AppService } from "../service/appService"
@@ -16,7 +16,8 @@ tasks:Array<any>;
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
-    public appService: AppService
+    public appService: AppService,
+    public alertCtrl: AlertController
   ) {
 
   this.loadVorhaben();
@@ -72,6 +73,46 @@ tasks:Array<any>;
 
     modal.present();
   }
+
+  checkAufgabe(task){
+    var index = this.tasks.indexOf(task);
+      this.tasks.splice(index, 1);
+  }
+
+  cancelTask(task){
+
+      let prompt = this.alertCtrl.create({
+        title: 'Zurückweisen',
+        inputs: [
+          {
+            name: 'Begründung',
+            placeholder: 'Begründung'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Abbrechen',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Zurückweisen',
+            handler: data => {
+              var index = this.tasks.indexOf(task);
+              this.tasks.splice(index, 1);
+            }
+          }
+        ]
+      });
+      prompt.present();
+
+
+    }
+
+
+
+
 
 
 }
