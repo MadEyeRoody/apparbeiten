@@ -47,41 +47,14 @@ export class HomePage {
   }
 
   toggleAufgabe(clickedAufgabe, selected) {
-    var aktiveVorhaben;
 
     console.info('toggleAufgabe', clickedAufgabe, selected);
-
-    //clickedAufgabe.selected = !selected;
 
     if (!selected){
       clickedAufgabe.selected = true;
 
       this.aufgaben.push(clickedAufgabe);
     }
-
-    // if (!selected) {
-    //     this.tasks.forEach((vorhaben) => {
-    //       if (vorhaben.aufgaben) {
-    //           vorhaben.aufgaben.forEach((aufgabe) => {
-    //             if (aufgabe.name == clickedAufgabe.name) {
-    //                 aktiveVorhaben = vorhaben;
-
-    //                 if (aufgabe.beteiligtePersonen) {
-    //                   aufgabe.beteiligtePersonen.push(this.meinUser);
-    //                 } else {
-    //                   aufgabe.beteiligtePersonen = [this.meinUser];
-    //                 } 
-
-    //                 console.info("aktiveVorhaben", aktiveVorhaben);
-    //                 this.appService.updateVorhaben(aktiveVorhaben);
-    //                 this.refresh(null);
-    //             }
-    //           })
-    //       }
-    //     });
-    // }
-    
-    
   }
 
   setVerschiedeneTasks(data) {
