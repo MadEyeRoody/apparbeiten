@@ -20,6 +20,7 @@ export class CreateTaskPage {
   tasks: Array<any>;
   vorhaben;
   selectedPersons:Array<any>;
+  beschreibung;
 
 
   constructor(
@@ -50,8 +51,10 @@ export class CreateTaskPage {
     var task =
       {
         name: this.taskName,
+        description: this.beschreibung,
         endDatum: this.dueDate,
-        beteiligtePersonen:this.selectedPersons
+        beteiligtePersonen:this.selectedPersons,
+
       }
 
 
