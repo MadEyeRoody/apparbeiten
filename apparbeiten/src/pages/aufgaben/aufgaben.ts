@@ -25,13 +25,25 @@ tasks:Array<any>;
 
   loadVorhaben() {
 
-    this.appService.getVorhabenPoll().subscribe(
+    this.appService.getVorhaben().subscribe(
       data => {
 
-        
+        var dingens = [];
+        for (var item of data){
+          for (var item2 of item.aufgaben){
+            for(var item3 of item2.beteiligtePersonen){
+              if(item3.username == "John Snow"){
+                dingens.push(item2);
 
-        this.tasks = data;
+                console.log(JSON.stringify(item2))
+              }
+            }
 
+          }
+
+        }
+
+        this.tasks=dingens;
 
 
 

@@ -23,17 +23,20 @@
 </ion-header>
 
 <ion-content>
-    <ion-list *ngFor="let task of tasks.aufgaben">
-      <ion-card>
-        <ion-card-title>
-          <ion-label>{{task.name}}</ion-label>
-          <ion-note item-right>{{task.dueDate}}</ion-note>
-        </ion-card-title>
-        <ion-card-content>
+    <ion-list >
+      <ion-item-sliding *ngFor="let task of tasks">
+        <ion-item>
+          <h3>{{task.name}}</h3>
+          <p> {{task.description}}</p>
+          <ion-note item-right>{{task.endDatum}}</ion-note>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="secondary"><ion-icon name="checkmark"></ion-icon>Erledigt</button>
+          <button ion-button color="danger"><ion-icon name="close"></ion-icon>Zurückweisen</button>
 
-        </ion-card-content>
+        </ion-item-options>
 
-      </ion-card>
+      </ion-item-sliding>
 
       </ion-list>
 
